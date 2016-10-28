@@ -24,6 +24,7 @@
       // other libraries
       'rxjs':                      'npm:rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
+      'ui-router-ng2': 'npm:ui-router-ng2',
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -36,6 +37,10 @@
       },
       'angular-in-memory-web-api': {
         main: './index.js',
+        defaultExtension: 'js'
+      },
+      'ui-router-ng2': {
+        main: './ng2.js',
         defaultExtension: 'js'
       }
     }
