@@ -6,8 +6,9 @@ import { StateService } from 'ui-router-ng2';
 @Component({
   selector: 'main',
   template: `
-    <p>main<p>
+    <h2>Welcome to Prattle</h2>
     <a uiSref="login">Login</a>
+    <a uiSref="register">Register</a>
   `
 })
 export class MainComponent {}
