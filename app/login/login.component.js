@@ -8,18 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 var LoginComponent = (function () {
     function LoginComponent() {
     }
-    LoginComponent = __decorate([
-        core_1.Component({
-            selector: 'login',
-            template: "\n    <p>Login<p>\n    <a uiSref=\"main\">Home</a>\n    <a uiSref=\"register\">Register</a>\n  "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], LoginComponent);
     return LoginComponent;
 }());
+LoginComponent = __decorate([
+    core_1.Component({
+        selector: 'login',
+        template: "\n  <h2>Login</h2>\n  <div class=\"container\">\n    <div class=\"row\">\n      <div class=\"col-sm-6 col-sm-offset-4\">\n        <form>\n          <div class=\"form-group\">\n            <label for=\"emailAddress\">Email*</label>\n            <div class =\"row\">\n              <div class=\"col-xs-12 col-md-7\">\n                <input type=\"email\" class=\"form-control\" id=\"emailAddress\" required>\n              </div>\n            </div>\n          </div>\n          <div class=\"form-group\">\n            <label for=\"password\">Password*</label>\n            <div class =\"row\">\n              <div class=\"col-xs-12 col-md-7\">\n                <input type=\"password\" class=\"form-control\" id=\"password\" required>\n              </div>\n            </div>\n          </div>\n          <button type=\"submit\" class=\"btn btn-primary\">Login</button>\n        </form>\n      </div>\n  </div>\n  <br/>\n  <a uiSref=\"main\">Home</a>\n  <a uiSref=\"register\">Register</a>\n</div>\n\n  "
+    }),
+    __metadata("design:paramtypes", [])
+], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map
