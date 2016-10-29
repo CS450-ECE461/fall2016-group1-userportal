@@ -8,18 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 var RegisterComponent = (function () {
     function RegisterComponent() {
     }
-    RegisterComponent = __decorate([
-        core_1.Component({
-            selector: 'resgister',
-            template: "\n    <p>Register<p>\n    <a uiSref=\"main\">Home</a>\n    <a uiSref=\"login\">Login</a>\n  "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], RegisterComponent);
     return RegisterComponent;
 }());
+RegisterComponent = __decorate([
+    core_1.Component({
+        selector: 'resgister',
+        template: "\n\n    <p>Register<p>\n    <form>\n      <div class=\"form-group\">\n        <label for=\"id\">Username*</label>\n        <div class =\"row\">\n          <div class=\"col-xs-12 col-md-3\">\n            <input type=\"text\" class=\"form-control\" id=\"id\" required>\n          </div>\n          <div class=\"col-md-9\"></div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"firstName\">First  Name*</label>\n        <div class =\"row\">\n          <div class=\" col-xs-12 col-md-3\">\n            <input type=\"text\" class=\"form-control\" id=\"firstName\" required>\n          </div>\n          <div class=\"col-md-9\"></div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"middleName\">Middle Name</label>\n        <div class =\"row\">\n          <div class=\"col-xs-12 col-md-3\">\n            <input type=\"text\" class=\"form-control\" id=\"middleName\">\n          </div>\n          <div class=\"col-md-9\"></div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"lastName\">Last Name*</label>\n        <div class =\"row\">\n          <div class=\" col-xs-12 col-md-3\">\n            <input type=\"text\" class=\"form-control\" id=\"lastName\" required>\n          </div>\n          <div class=\"col-md-9\"></div>\n        </div>\n      </div>\n      <div class=\"form-group\">\n        <label for=\"emailAddress\">Email*</label>\n        <div class =\"row\">\n          <div class=\"col-xs-12 col-md-3\">\n            <input type=\"text\" class=\"form-control\" id=\"emailAddress\" required>\n          </div>\n          <div class=\"col-md-9\"></div>\n        </div>\n      </div>\n      <button type=\"submit\" class=\"btn btn-primary\">Register</button>\n    </form>\n    <br/>\n    <a uiSref=\"main\">Home</a>\n    <a uiSref=\"login\">Login</a>\n  "
+    }),
+    __metadata("design:paramtypes", [])
+], RegisterComponent);
 exports.RegisterComponent = RegisterComponent;
 //# sourceMappingURL=register.component.js.map
