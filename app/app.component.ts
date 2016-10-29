@@ -6,7 +6,9 @@ import { NgModule, Component } from '@angular/core';
 @Component({
   selector: 'app',
   template: `
-    <ui-view></ui-view>
+    <div class ="container">
+      <ui-view></ui-view>
+    </div>
   `
 })
 export class AppComponent {}
