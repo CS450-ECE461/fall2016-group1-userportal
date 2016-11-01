@@ -2,7 +2,6 @@
 import { Component } from '@angular/core';
 import { StateService } from 'ui-router-ng2';
 
-
 @Component({
   selector: 'resgister',
   template: `
@@ -11,12 +10,12 @@ import { StateService } from 'ui-router-ng2';
     <div class="container">
       <div class="row">
         <div class="col-sm-6 col-sm-offset-4">
-          <form>
+        <form #f="ngForm" (ngSubmit)="onSubmit(f.value)" class="ui form">
             <div class="form-group">
               <label for="id">Username*</label>
               <div class ="row">
                 <div class="col-xs-12 col-md-7">
-                  <input type="text" class="form-control" id="id" required>
+                  <input type="text" class="form-control" id="id" name="id" ngModel>
                 </div>
               </div>
             </div>
@@ -24,7 +23,7 @@ import { StateService } from 'ui-router-ng2';
               <label for="firstName">First Name*</label>
               <div class ="row">
                 <div class="col-xs-12 col-md-7">
-                  <input type="text" class="form-control" id="firstName" required>
+                  <input type="text" class="form-control" id="firstName" name="firstName" ngModel>
                 </div>
               </div>
             </div>
@@ -32,7 +31,7 @@ import { StateService } from 'ui-router-ng2';
               <label for="middleName">Middle Name</label>
               <div class ="row">
                 <div class="col-xs-12 col-md-7">
-                  <input type="text" class="form-control" id="middleName">
+                  <input type="text" class="form-control" id="middleName" name ="middleName" ngModel>
                 </div>
               </div>
             </div>
@@ -40,7 +39,7 @@ import { StateService } from 'ui-router-ng2';
               <label for="lastName">Last Name*</label>
               <div class ="row">
                 <div class="col-xs-12 col-md-7">
-                  <input type="text" class="form-control" id="lastName" required>
+                  <input type="text" class="form-control" id="lastName" name="lastName" ngModel>
                 </div>
               </div>
             </div>
@@ -48,7 +47,7 @@ import { StateService } from 'ui-router-ng2';
               <label for="emailAddress">Email*</label>
               <div class ="row">
                 <div class="col-xs-12 col-md-7">
-                  <input type="email" class="form-control" id="emailAddress" required>
+                  <input type="email" class="form-control" id="emailAddress" name="emailAddress" ngModel >
                 </div>
               </div>
             </div>
@@ -56,7 +55,7 @@ import { StateService } from 'ui-router-ng2';
               <label for="password">Password*</label>
               <div class ="row">
                 <div class="col-xs-12 col-md-7">
-                  <input type="password" class="form-control" id="password" required>
+                  <input type="password" class="form-control" id="password" name="password" ngModel>
                 </div>
               </div>
             </div>
@@ -64,7 +63,7 @@ import { StateService } from 'ui-router-ng2';
               <label for="confirmPassword">Confirm Password*</label>
               <div class ="row">
                 <div class="col-xs-12 col-md-7">
-                  <input type="password" class="form-control" id="confirmPassword" required>
+                  <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" ngModel>
                 </div>
               </div>
             </div>
@@ -78,4 +77,8 @@ import { StateService } from 'ui-router-ng2';
   </div>
   `
 })
-export class RegisterComponent {}
+export class RegisterComponent {
+  onSubmit(form: any): void {
+    console.log('you submitted value:', form);
+  }
+}

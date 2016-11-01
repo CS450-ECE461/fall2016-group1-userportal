@@ -8,18 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
+var core_1 = require('@angular/core');
 var MainComponent = (function () {
     function MainComponent() {
     }
+    MainComponent = __decorate([
+        core_1.Component({
+            selector: 'main',
+            template: "\n    <h2>Welcome to Prattle</h2>\n    <a uiSref=\"login\">Login</a>\n    <a uiSref=\"register\">Register</a>\n  "
+        }), 
+        __metadata('design:paramtypes', [])
+    ], MainComponent);
     return MainComponent;
 }());
-MainComponent = __decorate([
-    core_1.Component({
-        selector: 'main',
-        template: "\n    <h2>Welcome to Prattle</h2>\n    <a uiSref=\"login\">Login</a>\n    <a uiSref=\"register\">Register</a>\n  "
-    }),
-    __metadata("design:paramtypes", [])
-], MainComponent);
 exports.MainComponent = MainComponent;
 //# sourceMappingURL=main.component.js.map

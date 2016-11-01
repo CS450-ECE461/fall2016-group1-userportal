@@ -7,11 +7,13 @@ import { MainComponent } from './main.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UIRouterModule } from 'ui-router-ng2';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     UIRouterModule.forRoot(),
     UIRouterModule.forChild({
       states: [{

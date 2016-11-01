@@ -17,6 +17,7 @@ var main_component_1 = require('./main.component');
 var login_component_1 = require('./login/login.component');
 var register_component_1 = require('./register/register.component');
 var ui_router_ng2_1 = require('ui-router-ng2');
+var forms_2 = require('@angular/forms');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -25,6 +26,7 @@ var AppModule = (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
+                forms_2.ReactiveFormsModule,
                 ui_router_ng2_1.UIRouterModule.forRoot(),
                 ui_router_ng2_1.UIRouterModule.forChild({
                     states: [{
