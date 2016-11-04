@@ -1,0 +1,32 @@
+doctype html
+html(lang="en")
+    head
+        title Login
+
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
+
+    body
+        div.container
+            h1 Login
+
+
+            form.form-horizontal(method='post', action='/login')
+                div.form-group
+                    label.col-sm-2.control-label(for="username") Email*
+                    div.col-sm-10
+                        input#username.form-control(type="text", name="username" required)
+
+                div.form-group
+                    label.col-sm-2.control-label(for="password") Password*
+                    div.col-sm-10
+                        input#password.form-control(type="password",name="password" required)
+
+                div.form-group
+                    div.col-sm-offset-2.col-sm-10
+                        button.btn.btn-default(type="submit") Submit
+
+            a(href='/home') Home
+            br
+            a(href='/register') Register
