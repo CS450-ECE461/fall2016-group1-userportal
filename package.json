@@ -1,44 +1,33 @@
 {
-  "name": "Prattle",
-  "version": "1.0.0",
+  "name": "prattle",
+  "description": "",
+  "version": "0.0.1",
+  "private": true,
+
   "scripts": {
-    "start": "concurrently \"npm run tsc:w\" \"npm run lite\" ",
-    "lite": "lite-server",
-    "postinstall": "typings install",
-    "tsc": "tsc",
-    "tsc:w": "tsc -w",
-    "typings": "typings"
+    "test": "env NODE_ENV=test mocha --recursive tests/tests",
+    "start-server": "env NODE_ENV=production forever -o ./app/temp/logs/output.log -e ./app/temp/logs/error.log start ./app/index.js",
+    "stop-server": "env NODE_ENV=production forever stop app/index.js"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/angular/angular.io/blob/master/LICENSE"
-    }
-  ],
+
   "dependencies": {
-    "@angular/common": "~2.1.0",
-    "@angular/compiler": "~2.1.0",
-    "@angular/core": "~2.1.0",
-    "@angular/forms": "~2.1.0",
-    "@angular/http": "~2.1.0",
-    "@angular/platform-browser": "~2.1.0",
-    "@angular/platform-browser-dynamic": "~2.1.0",
-    "@angular/router": "~3.1.0",
-    "@angular/upgrade": "~2.1.0",
-    "angular-in-memory-web-api": "~0.1.5",
-    "bootstrap": "^3.3.7",
-    "core-js": "^2.4.1",
-    "ng2-bootstrap": "^1.1.14",
-    "reflect-metadata": "^0.1.8",
-    "rxjs": "5.0.0-beta.12",
-    "systemjs": "0.19.39",
-    "ui-router-ng2": "^1.0.0-beta.3",
-    "zone.js": "^0.6.25"
+    "@onehilltech/blueprint": "^1.1.1",
+    "@onehilltech/blueprint-mongodb": "^0.9.1",
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2",
+    "superagent": "^2.3.0",
+    "supertest": "^2.0.1",
+    "passport-local": "^1.0.0"
   },
+
   "devDependencies": {
-    "concurrently": "^3.0.0",
-    "lite-server": "^2.2.2",
-    "typescript": "^2.0.3",
-    "typings": "^1.4.0"
+
+  },
+
+  "license": "Apache-2.0",
+
+  "engines": {
+    "node": ">=4.0.0",
+    "npm": ">=3.0.0"
   }
 }
