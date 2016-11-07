@@ -15,7 +15,7 @@ LoginController.prototype.completeLogin = function () {
 
 LoginController.prototype.logout = function () {
   return function (req, res) {
-    req.logout ();
+    //req.logout ();
     res.redirect ('/login');
   }
 };

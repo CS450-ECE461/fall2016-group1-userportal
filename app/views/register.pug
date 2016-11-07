@@ -13,38 +13,37 @@ html(lang="en")
 
             h3 Fields with a star are required.
             form.form-horizontal(method='post', action='/register')
-                div.form-group
-                  label.col-sm-2.control-label(for="username") Username*
+              div.form-group
+                label.col-sm-2.control-label(for="username") Username*
+                div.col-sm-10
+                    input#username.form-control(type="text", name="username" value = "jsmith" required)
+              div.form-group
+                  label.col-sm-2.control-label(for="firstName") First Name*
                   div.col-sm-10
-                      input#email.form-control(type="text", name="username" required)
-                div.form-group
-                    label.col-sm-2.control-label(for="firstName") First Name*
-                    div.col-sm-10
-                        input#email.form-control(type="text", name="lastName" required)
-                div.form-group
-                    label.col-sm-2.control-label(for="middleName") Middle Name
-                    div.col-sm-10
-                        input#email.form-control(type="text", name="middleName")
-                div.form-group
-                    label.col-sm-2.control-label(for="lastName") Last Name*
-                    div.col-sm-10
-                        input#email.form-control(type="text", name="lastName" required)
-                div.form-group
-                    label.col-sm-2.control-label(for="emailAddress") Email*
-                    div.col-sm-10
-                        input#email.form-control(type="email", name="emailAddress" required)
-                div.form-group
-                    label.col-sm-2.control-label(for="password") Password*
-                    div.col-sm-10
-                        input#password.form-control(type="password", name="password")
-                div.form-group
-                    label.col-sm-2.control-label(for="confirmPassword") Confirm Password*
-                    div.col-sm-10
-                        input#password.form-control(type="password", name="confirmPassword")
-
-                div.form-group
-                    div.col-sm-offset-2.col-sm-10
-                        button.btn.btn-default(type="submit") Submit
+                      input#firstName.form-control(type="text", name="firstName" value="John"  required)
+              div.form-group
+                  label.col-sm-2.control-label(for="middleName") Middle Name
+                  div.col-sm-10
+                      input#middleName.form-control(type="text", name="middleName" value="Albert")
+              div.form-group
+                  label.col-sm-2.control-label(for="lastName") Last Name*
+                  div.col-sm-10
+                      input#lastName.form-control(type="text", name="lastName" value = "Smith" required)
+              div.form-group
+                  label.col-sm-2.control-label(for="emailAddress") Email*
+                  div.col-sm-10
+                      input#email.form-control(type="email", name="emailAddress" value = "john@test.com" required)
+              div.form-group
+                  label.col-sm-2.control-label(for="password") Password*
+                  div.col-sm-10
+                      input#password.form-control(type="password", name="password" value = "1")
+              div.form-group
+                  label.col-sm-2.control-label(for="confirmPassword") Confirm Password*
+                  div.col-sm-10
+                      input#confirmPassword.form-control(type="password", name="confirmPassword" value = "1")
+              div.form-group
+                  div.col-sm-offset-2.col-sm-10
+                      button.btn.btn-default(type="submit") Submit
 
             a(href='/home') Home
             br
