@@ -15,14 +15,14 @@ LoginController.prototype.completeLogin = function () {
         "password" : req.body.password,
       };
       request
-          .post('localhost:5000/v1/auth/jwt')
+          .post('localhost:5000/api/v1/auth/jwt')
           .send(newUser)
           .end(function (err, resp){
             if(err){
               console.log(err);
             }
             else{
-              return res.render('/user', {});
+                return  res.redirect('/dashboard');
             }
           });
   };

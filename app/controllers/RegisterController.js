@@ -41,7 +41,7 @@ RegisterController.prototype.completeSignUp = function () {
             console.log(err);
           }
           else{
-            return res.render('/dashboard', {});
+            return  res.redirect('/login');
           }
         });
   };
