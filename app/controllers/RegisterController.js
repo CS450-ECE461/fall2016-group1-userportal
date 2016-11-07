@@ -1,4 +1,5 @@
 var blueprint = require ('@onehilltech/blueprint')
+      request =  require ('superagent')
   ;
 
 function RegisterController () {
@@ -19,12 +20,12 @@ RegisterController.prototype.completeSignUp = function () {
   //   "password" : req.body.password
   // });
      var user = {
-       "username" : req.body.username,
        "firstName" : req.body.firstName,
        "middleName" : req.body.middleName,
        "lastName" : req.body.lastName,
        "emailAddress" :  req.body.emailAddress,
-       "password" : req.body.password
+       "password" : req.body.password,
+        "handle" : req.body.username,
     };
     console.log('Username: '+user.username);
     console.log('First Name: '+user.firstName);
@@ -32,7 +33,17 @@ RegisterController.prototype.completeSignUp = function () {
     console.log('Last Name: '+user.lastName);
     console.log('Email: '+user.emailAddress);
     console.log('Password: '+user.password);
-    return res.redirect ('/dashboard');
+    request
+        .post('localhost:5000/api/v1/users')
+        .send(user)
+        .end(function (err, resp){
+          if(err){
+            console.log(err);
+          }
+          else{
+            return res.render('/dashboard', {});
+          }
+        });
   };
 
 };

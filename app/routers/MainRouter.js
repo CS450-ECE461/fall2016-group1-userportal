@@ -6,10 +6,7 @@ module.exports = exports = {
   },
   '/login': {
     get  : { view : 'login.pug'},
-    post : {
-      before: [passport.authenticate ('local', {failureRedirect: '/register'})],
-      action: 'LoginController@completeLogin'
-    },
+    post : {action: 'LoginController@completeLogin'},
   },
   '/register': {
     get  : { view : 'register.pug'},
