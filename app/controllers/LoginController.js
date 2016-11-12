@@ -22,7 +22,9 @@ LoginController.prototype.completeLogin = function () {
               console.log(err);
             }
             else{
-                return  res.redirect('/dashboard');
+              var jwt = resp.body.jwt;
+              console.log(jwt);
+              return  res.redirect('/dashboard');
             }
           });
   };
