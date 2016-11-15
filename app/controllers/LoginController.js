@@ -19,7 +19,10 @@ LoginController.prototype.completeLogin = function () {
           .send(newUser)
           .end(function (err, resp){
             if(err){
-              console.log(err);
+              if(err.status == '422')
+                res.render('login.pug', {login_error_message: 'Email or password incorrect.'});
+              else
+                console.log(err);
             }
             else{
               var jwt = resp.body.jwt;
