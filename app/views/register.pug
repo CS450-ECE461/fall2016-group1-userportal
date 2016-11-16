@@ -6,8 +6,6 @@ html(lang="en")
         link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
         link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
-        script
-        	include app/models/validation.js
 
     body
         div.container
@@ -45,6 +43,6 @@ html(lang="en")
                       input#confirmPassword.form-control(type="password", name="confirmPassword" value = "carlos!123")
               div.form-group
                   div.col-sm-offset-2.col-sm-10
-                      #submit.button.btn.btn-default(type="submit") Submit
+                      button.btn.btn-default(type="submit") Submit
 
             a(href='/login') Login
