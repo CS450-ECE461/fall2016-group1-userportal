@@ -1,6 +1,7 @@
 'use strict';
 var passport      = require ('passport')
   , LocalStrategy = require ('passport-local').Strategy
+
   ;
 
 module.exports = initPassport;
@@ -13,18 +14,19 @@ function initPassport (app) {
 
   function authorize (username, password, done) {
     var newUser = {
-      "username" : req.body.username,
-      "password" : req.body.password,
+      "username" : username,
+      "password" : password,
     };
+    console.log("Username: "+newUser.username);
+    console.log("Password: "+newUser.password);
     request
         .post('localhost:5000/api/v1/auth/jwt')
-        .send(newUser)
-        .end(function (err, resp){
-          if(err){
-            if(err.status == '422')
-              res.render('login.pug', {login_error_message: 'Email or password incorrect.'});
-            else
-              console.log(err);
+        .send({newUser})
+        .end(function (error, resp){
+          if(error){
+            if(error.status == '422')
+              //res.render('login.pug', {login_error_message: 'Email or password incorrect.'});
+              console.log(error);
           }
           else{
             var jwt = resp.body.jwt;

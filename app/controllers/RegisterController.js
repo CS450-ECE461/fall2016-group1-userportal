@@ -23,15 +23,15 @@ RegisterController.prototype.completeSignUp = function () {
     request
         .post('localhost:5000/api/v1/users')
         .send({ user: user})
-        .end(function (err, resp){
+        .end(function (error, resp){
             if(req.body.firstName.search(regExp) == -1 || req.body.middleName.search(regExp) == -1 || req.body.lastName.search(regExp) == -1){
                 res.render('register.pug', {error_message: 'First/middle/last name should contain letters only'});
               }
-              if(err){
-                if(err.status == '422'){
+              if(error){
+                if(error.status == '422'){
                    res.render('register.pug', {error_message: 'Username and or email have been used already.'});
                 }
-                else if(err.status == '409') {
+                else if(error.status == '409') {
                   res.render('register.pug', {error_message: 'Email has already been used.'});
                 }
                 else{
