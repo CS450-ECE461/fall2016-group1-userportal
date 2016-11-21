@@ -29,7 +29,9 @@ function initPassport (app) {
           else{
             var jwt = resp.body.jwt;
             console.log(jwt);
+            return done (null, jwt);
           }
+          return done(null, false);
         });
   }
 }
