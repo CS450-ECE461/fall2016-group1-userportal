@@ -15,13 +15,16 @@ function initPassport (app) {
   function authorize (username, password, done) {
     var newUser = {
       "username" : username,
-      "password" : password,
+      "password" : password
     };
     console.log("Username: "+newUser.username);
     console.log("Password: "+newUser.password);
+    console.log("New User: "+ newUser )
     request
         .post('localhost:5000/api/v1/auth/jwt')
-        .send({newUser})
+        .type("json")
+        .set("Accept", "application/json")
+        .send(newUser)
         .end(function (error, resp){
           if(error){
             if(error.status == '422')
