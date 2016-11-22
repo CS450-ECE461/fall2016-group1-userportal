@@ -1,22 +1,42 @@
 'use strict';
 var passport      = require ('passport')
   , LocalStrategy = require ('passport-local').Strategy
+
   ;
 
 module.exports = initPassport;
 
 function initPassport (app) {
-  var User = app.models.User;
+
   var opts = {session: true};
 
   passport.use (new LocalStrategy (opts, authorize));
 
   function authorize (username, password, done) {
-    User.findOne ({ username: username }, function (err, user) {
-      if (err) { return done (err); }
-      if (!user) { return done (null, false); }
-      if (!user.verifyPassword (password)) { return done (null, false); }
-      return done (null, user);
-    });
+    var newUser = {
+      "username" : username,
+      "password" : password
+    };
+    console.log("Username: "+newUser.username);
+    console.log("Password: "+newUser.password);
+    console.log("New User: "+ newUser )
+    request
+        .post('localhost:5000/api/v1/auth/jwt')
+        .type("json")
+        .set("Accept", "application/json")
+        .send(newUser)
+        .end(function (error, resp){
+          if(error){
+            if(error.status == '422')
+              //res.render('login.pug', {login_error_message: 'Email or password incorrect.'});
+              console.log(error);
+          }
+          else{
+            var jwt = resp.body.jwt;
+            console.log(jwt);
+            return done (null, jwt);
+          }
+          return done(null, false);
+        });
   }
 }
