@@ -28,7 +28,6 @@ function initPassport (app) {
         .end(function (error, resp){
           if(error){
             if(error.status == '422')
-              //res.render('login.pug', {login_error_message: 'Email or password incorrect.'});
               console.log(error);
           }
           else{
