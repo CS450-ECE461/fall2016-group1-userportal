@@ -13,5 +13,8 @@ module.exports = exports = {
   },
   '/dashboard' : {
     get  : { view : 'dashboard.pug' }
+  },
+  '/' :{
+    get : { view : 'login.pug' }
   }
 };
