@@ -21,9 +21,11 @@ module.exports = exports = {
   '/dashboard' : {
     use : userLoggedIn,
     get  : { view : 'dashboard.pug' },
-    post : { action: 'UserController@signout'}
+    post : { action: 'RegisterController@completeSignUp'}
   },
-
+  '/signout' : {
+    get  : {  action: 'UserController@signout'}
+  },
   '/' :{
     get : { view : 'login.pug' }
   }
