@@ -10,4 +10,5 @@ html(lang="en")
     body
         div.container
             h1 Logged In
-            a(href='/login') Logout
+            form.form-horizontal(method='post', action='/dashboard')
+              a(href='/signout') Logout
