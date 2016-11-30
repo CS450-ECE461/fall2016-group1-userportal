@@ -1,8 +1,8 @@
-var requirePath = '../../../app/'
+var requirePath = '../../../app/';
 
-var chai = require("chai");
-var spies = require("chai-spies");
-var blueprint = require ('@onehilltech/blueprint')
+var chai = require('chai');
+var spies = require('chai-spies');
+var blueprint = require ('@onehilltech/blueprint');
 var LoginController = require(requirePath + 'controllers/LoginController');
 
 chai.use(spies);
