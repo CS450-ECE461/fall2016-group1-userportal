@@ -1,18 +1,32 @@
 var requirePath = '../../../app/';
 
-var chai = require('chai');
-var spies = require('chai-spies');
+var chai = require('chai'); // test suite
+var spies = require('chai-spies'); // spies plugin
 var blueprint = require ('@onehilltech/blueprint');
 var request = require('superagent');
 var RegisterController = require(requirePath + 'controllers/RegisterController');
 
+// configure test suite
 chai.use(spies);
+var assert = chai.assert;
+var should = chai.should();
 var spy = chai.spy;
 
+// copy external objects that we are going to modify
+var _request = Object.assign({}, request);
+
+// "gloabal" variables used throughout tests
 var controller, req, res, post, send, end, user;
 
 describe('RegisterController', function() {
+    // describe('Class'...)
+    // Test are for the specified "class"
     beforeEach(function() {
+        // Specifies a function to run before each test (it)
+        // Only affects tests in this describe ('RegisterController')
+        // and nested describes ('constructor', 'completeSignUp', etc.)
+        // Use this to setup things that will be used in most of the affected tests
+        // (usually the "global" variables)
         controller = new RegisterController();
         req = {
             body: {
@@ -31,6 +45,7 @@ describe('RegisterController', function() {
         end = spy();
         send = spy(function() { return { end: end } });
         post = spy(function() { return { send: send } });
+        // override post with a spy so that it doesn't actually try to send data
         request.post = post;
 
         // set up user
@@ -50,12 +65,21 @@ describe('RegisterController', function() {
     });
 
     describe('completeSignUp', function() {
+        // describe('methodName'...)
+        // Test a method of the "class"
         it('returns a function', function() {
+            // it('does this thing'...)
+            // A single test for the described function ('completeSignUp')
             controller.completeSignUp().should.be.a('function');
         });
 
         describe('returned function', function() {
+            // describe('innerMethod'...)
+            // Since this function ('completeSignUp') returns a function
+            // we want to test the returned function as well
             it('posts the user to the api', function() {
+                // it('does this thing'...)
+                // a test for the inner describe ('returned function')
                 controller.completeSignUp()(req, res);
 
                 post.should.have.been.called.once();
@@ -69,9 +93,15 @@ describe('RegisterController', function() {
             });
 
             describe('request.end callback', function() {
+                // describe('innerMethod'...)
+                // The containing funciton ('returned function') passes an
+                // ananymous function as a callback so we need to test it
                 var completeSignUp;
 
                 beforeEach(function() {
+                    // Sppecifies a function to run before each test (it)
+                    // Only affects test in this describe and nested describes
+                    // Used to set up things that will be used in affected tests
                     completeSignUp = controller.completeSignUp();
                 });
 
@@ -142,3 +172,6 @@ describe('RegisterController', function() {
         });
     });
 });
+
+// restore modified external objects
+Object.assign(request, _request);
