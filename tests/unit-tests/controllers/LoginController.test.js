@@ -33,25 +33,29 @@ describe('LoginController', function() {
 
     describe('completeLogin', function() {
         it('returns a function that redirects to the dashboard', function() {
-            var func = controller.completeLogin(); // get the function
+            controller.completeLogin().should.be.a('function');
+        });
 
-            func.should.be.a('function');
+        describe('returned function', function() {
+            it('redirects to the dashboard', function() {
+                controller.completeLogin()(null, res);
 
-            func(null, res); // test the function
-
-            res.redirect.should.have.been.called.with.exactly('/dashboard');
+                res.redirect.should.have.been.called.with.exactly('/dashboard');
+            });
         });
     });
 
     describe('logout', function() {
         it('returns a function that redirects to login', function() {
-            var func = controller.logout(); // get the function
+            controller.logout().should.be.a('function');
+        });
 
-            func.should.be.a('function');
+        describe('returned function', function() {
+            it('redirects to login', function() {
+                controller.logout()(null, res);
 
-            func(null, res); // test the function
-
-            res.redirect.should.have.been.called.with.exactly('/login');
+                res.redirect.should.have.been.called.with.exactly('/login');
+            });
         });
     });
 });
