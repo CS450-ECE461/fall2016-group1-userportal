@@ -18,16 +18,17 @@ describe('RegisterController', function() {
         controller = new RegisterController();
         req = {
             body: {
-                'firstName' : '',
-                'middleName' : '',
-                'lastName' : '',
-                'emailAddress' :  '',
-                'password' : '',
+                'firstName' : 'John',
+                'middleName' : 'U',
+                'lastName' : 'Doe',
+                'emailAddress' :  'johndoe@idk.com',
+                'password' : 'null',
                 'username' : ''
             }
         };
         res = {
-            render: spy()
+            render: spy(),
+            redirect: spy()
         };
         end = spy();
         send = spy(function() { return { end: end } });
@@ -35,7 +36,7 @@ describe('RegisterController', function() {
         request.post = post;
 
         // set up user
-        user = Object.assign({}, req.body); // copy
+        user = Object.assign({}, req.body); // copy req.body
         user.handle = user.username; // "rename" 'username' to 'handle'
         delete user.username;
     });
@@ -51,20 +52,93 @@ describe('RegisterController', function() {
     });
 
     describe('completeSignUp', function() {
-        it('returns a function', function() {
-            controller.completeSignUp().should.be.a('function');
-        });
-
-        it('should post the user to the api', function() {
+        it('returns a function that posts the user to the api', function() {
             var func = controller.completeSignUp(); // get function
+
+            func.should.be.a('function');
 
             func(req, res); // test function
 
             post.should.have.been.called.once();
+
+            var postArg = post.__spy.calls[0][0];
+            postArg.should.be.a('string')
+            postArg.search(/api.*users/).should.not.equal(-1);
             send.should.have.been.called.with.exactly({ user: user });
-            end.should.have.been.called.with.exactly(controller._completeSignUpEnd);
+            end.should.have.been.called.once();
+            end.__spy.calls[0][0].should.be.a('function');
         });
     });
 
+    describe('completeSignUp request.end', function() {
+        var completeSignUp;
 
+        beforeEach(function() {
+            completeSignUp = controller.completeSignUp();
+        });
+
+        it('checks that first name only consist of characters', function() {
+            req.body.firstName = '_John';
+
+            completeSignUp(req, res);
+            end.__spy.calls[0][0](); // call the anonymous function
+
+            res.render.should.have.been.called.once();
+
+            var renderArgs = res.render.__spy.calls[0];
+            renderArgs[0].should.equal('register.pug');
+            renderArgs[1].error_message.search(/first.*name/i).should.not.equal(-1);
+        });
+
+        it('checks that middle name only consist of characters', function() {
+            req.body.middleName = 'U*';
+
+            completeSignUp(req, res);
+            end.__spy.calls[0][0](); // call the anonymous function
+
+            res.render.should.have.been.called.once();
+
+            var renderArgs = res.render.__spy.calls[0];
+            renderArgs[0].should.equal('register.pug');
+            renderArgs[1].error_message.search(/middle.*name/i).should.not.equal(-1);
+        });
+
+        it('checks that last name only consist of characters', function() {
+            req.body.lastName = 'D0e';
+
+            completeSignUp(req, res);
+            end.__spy.calls[0][0](); // call the anonymous function
+
+            res.render.should.have.been.called.once();
+
+            var renderArgs = res.render.__spy.calls[0];
+            renderArgs[0].should.equal('register.pug');
+            renderArgs[1].error_message.search(/last.*name/i).should.not.equal(-1);
+        });
+
+        it('checks for errors returned by the server', function() {
+            var statuses = ['422', '409', '400'];
+            var messages = [/username|email/i, /email/i, /something/i];
+            completeSignUp(req, res);
+
+            for (var i = 0; i < statuses.length; i++) {
+                end.__spy.calls[0][0]({ status: statuses[i] }); // call the anonymous function
+
+                res.render.should.have.been.called.once();
+
+                var renderArgs = res.render.__spy.calls[0];
+                renderArgs[0].should.equal('register.pug');
+                renderArgs[1].error_message.search(messages[i]).should.not.equal(-1);
+
+                res.render.reset();
+            }
+        });
+
+        it('redirects the user to the login page if registration succeeded', function() {
+            completeSignUp(req, res);
+            end.__spy.calls[0][0](); // call the anonymous function
+
+            res.redirect.should.have.been.called.with.exactly('/login');
+        });
+    });
 });
