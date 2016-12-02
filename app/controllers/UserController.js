@@ -91,22 +91,50 @@ UserController.prototype.renderUsers = function () {
 
 UserController.prototype.sendMessage = function () {
     return function (req, res) {
-      request
-          .post('localhost:5000/api/v1/messages')
-          .type("json")
-          .end(function (error, resp){
-            if(error){
-              if(error.status == '422')
-                console.log("Error: "+error);
-                res.render ('sendMessage.pug', {error_message: "The request didn't contain all necessary information"});
-              else if(error.status == '401')
-                console.log("Error: "+error);
-                res.render ('sendMessage.pug', {error_message: "The request didn't contain a valid JWT Header."});
-            }
-            else{
-              console.log(resp.body);
-              res.render ('dashboard.pug', {welcome: 'Welcome '+userInfo.firstName, message: "Message has been successfully sent"});
-            }
-          });
+      var message = {
+        "receiver" : req.body.receiver,
+        "expireAt" : req.body.expireAt,
+        "content" : req.body.content,
+      };
+      var userFound = false;
+      console.log(message.receiver);
+      console.log(message.expireAt);
+      console.log(message.content);
+      userArr.forEach(function(value) {
+        if(value.handle == message.receiver){
+          message.receiver = value._id;
+          userFound = true;
+        }
+      });
+      if(userFound){
+        request
+            .post('localhost:5000/api/v1/messages')
+            .type("json")
+            .set('Authorization', 'JWT '+token)
+            .send(message)
+            .end(function (error, resp){
+              if(error){
+                if(error.status == '422'){
+                  console.log("Error: "+error);
+                  res.render ('sendMessage.pug', {error_message: "The request didn't contain all necessary information"});
+                }
+                else if(error.status == '401'){
+                  console.log("Error: "+error);
+                  res.render ('sendMessage.pug', {error_message: "The request didn't contain a valid JWT Header."});
+                }
+              }
+              else{
+                console.log(resp.body);
+                res.render ('dashboard.pug',
+                {
+                  welcome: 'Welcome '+userInfo.firstName,
+                  message: "Message has been successfully sent"
+                });
+              }
+            });
+      }
+      else {
+        res.render ('sendMessage.pug', {error_message: "The username requested does not exist."});
+      }
     };
 };
