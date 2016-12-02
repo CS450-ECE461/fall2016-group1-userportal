@@ -1,3 +1,4 @@
+'use strict';
 var passport = require ('passport')
 ;
 
@@ -11,7 +12,7 @@ module.exports = exports = {
   '/login': {
     get  : { view : 'login.pug'},
     post : {
-      before: [passport.authenticate('local', {failureRedirect:'/login'})],
+      before : [passport.authenticate('local', {failureRedirect: '/login'})],
       action: 'LoginController@completeLogin'},
   },
   '/register': {
@@ -20,8 +21,7 @@ module.exports = exports = {
   },
   '/dashboard' : {
     use : userLoggedIn,
-    get  : { view : 'dashboard.pug' },
-    post : { action: 'RegisterController@completeSignUp'}
+    get  : { action: 'UserController@showMe'}
   },
   '/signout' : {
     get  : {  action: 'UserController@signout'}

@@ -21,6 +21,8 @@ UserController.prototype.signout = function () {
 
 UserController.prototype.showMe = function () {
   return function (req, res) {
-    res.render ('user.pug', {user: req.user});
+    var jwt = req.token;
+    console.log("Hello my token is: "+ req.token);
+    res.render ('dashboard.pug', {users: req.token});
   }
 };
