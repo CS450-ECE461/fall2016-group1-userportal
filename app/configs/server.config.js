@@ -25,12 +25,10 @@ module.exports = exports = {
     passport: {
       session: {
         serializer: function (token, done) {
-          console.log("Serialize: "+token)
           return done (null, token);
         },
 
         deserializer: function (token, done) {
-          console.log("Deserialize: "+token)
           return done (null, token);
         }
       }

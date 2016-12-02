@@ -49,12 +49,6 @@ UserController.prototype.showMe = function () {
             userInfo.handle = resp.body.handle;
             userInfo.created = resp.body.createdAt;
             userInfo.updated = resp.body.updatedAt;
-            console.log(userInfo.firstName);
-            console.log(userInfo.lastName);
-            console.log(userInfo.email);
-            console.log(userInfo.handle);
-            console.log(userInfo.created);
-            console.log(userInfo.updated);
             res.render ('dashboard.pug', {welcome: 'Welcome '+userInfo.firstName});
           }
         });

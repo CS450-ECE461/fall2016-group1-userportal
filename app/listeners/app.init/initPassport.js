@@ -32,7 +32,6 @@ function initPassport (app) {
           }
           else{
             var token = resp.body.jwt;
-            console.log(token);
             return done (null, token);
           }
           return done(null, false);
