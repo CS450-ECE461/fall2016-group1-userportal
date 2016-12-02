@@ -29,7 +29,8 @@ module.exports = exports = {
   },
   '/sendMessage' : {
     use : userLoggedIn,
-    get  : { action: 'UserController@renderUsers' }
+    get  : { action: 'UserController@renderUsers' },
+    post : { action: 'UserController@sendMessage'}
   },
   '/signout' : {
     get  : {  action: 'UserController@signout'}

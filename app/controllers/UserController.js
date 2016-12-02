@@ -88,3 +88,25 @@ UserController.prototype.renderUsers = function () {
           });
     };
 };
+
+UserController.prototype.sendMessage = function () {
+    return function (req, res) {
+      request
+          .post('localhost:5000/api/v1/messages')
+          .type("json")
+          .end(function (error, resp){
+            if(error){
+              if(error.status == '422')
+                console.log("Error: "+error);
+                res.render ('sendMessage.pug', {error_message: "The request didn't contain all necessary information"});
+              else if(error.status == '401')
+                console.log("Error: "+error);
+                res.render ('sendMessage.pug', {error_message: "The request didn't contain a valid JWT Header."});
+            }
+            else{
+              console.log(resp.body);
+              res.render ('dashboard.pug', {users: userArr});
+            }
+          });
+    };
+};
