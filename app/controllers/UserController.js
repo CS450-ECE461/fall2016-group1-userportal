@@ -1,7 +1,7 @@
 'use strict';
 
-var blueprint = require ('@onehilltech/blueprint')
-  ;
+var blueprint = require ('@onehilltech/blueprint');
+var ResourceClient = require('../../lib/ResourceClient');
 var token;
 var FName;
 var userInfo = {
@@ -12,6 +12,7 @@ var userInfo = {
   "created" : '',
   "updated" : ''
 };
+
 var userArr = {};
 module.exports = UserController;
 
@@ -91,6 +92,8 @@ UserController.prototype.renderUsers = function () {
 
 UserController.prototype.sendMessage = function () {
     return function (req, res) {
+      var messageClient = new ResourceClient("http://localhost:5000", "messages");
+      messageClient.jwt = token;
       var message = {
         "receiver" : req.body.receiver,
         "expireAt" : req.body.expireAt,
@@ -108,13 +111,9 @@ UserController.prototype.sendMessage = function () {
           userFound = true;
         }
       });
+
       if(userFound){
-        request
-            .post('localhost:5000/api/v1/messages')
-            .type("json")
-            .set('Authorization', 'JWT '+token)
-            .send(message)
-            .end(function (error, resp){
+            messageClient.create(message, function (error, resp) {
               if(error){
                 if(error.status == '422'){
                   console.log("Error: "+error);
