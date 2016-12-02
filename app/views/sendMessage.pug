@@ -20,15 +20,15 @@ html(lang="en")
               div.form-group
                 label.col-sm-2.control-label(for="receiver") To*
                 div.col-sm-10
-                    input#receiver.form-control(type="text", name="receiver" required)
+                    input#receiver.form-control(type="text", name="receiver" value="jsmith123" required)
               div.form-group
                   label.col-sm-2.control-label(for="expireAt") Expire at*
                   div.col-sm-10
-                      input#expireAt.form-control(type="text", name="expireAt"  required)
+                      input#expireAt.form-control(type="text", name="expireAt" value="600000"  required)
               div.form-group
                   label.col-sm-2.control-label(for="content") Message
                   div.col-sm-10
-                      input#content.form-control(type="text", name="content" value="Hi, this is a test message")
+                      input#content.form-control(type="text", name="content" value="Hi, this is a test message" required)
               div.form-group
                   p= error_message
                   div.col-sm-offset-2.col-sm-10

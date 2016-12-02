@@ -102,7 +102,9 @@ UserController.prototype.sendMessage = function () {
       console.log(message.content);
       userArr.forEach(function(value) {
         if(value.handle == message.receiver){
+          console.log("Username found: "+ message.receiver);
           message.receiver = value._id;
+          console.log("New value: "+ message.receiver);
           userFound = true;
         }
       });
@@ -116,11 +118,11 @@ UserController.prototype.sendMessage = function () {
               if(error){
                 if(error.status == '422'){
                   console.log("Error: "+error);
-                  res.render ('sendMessage.pug', {error_message: "The request didn't contain all necessary information"});
+                  res.render ('sendMessage.pug', {users: userArr, error_message: "The request didn't contain all necessary information"});
                 }
                 else if(error.status == '401'){
                   console.log("Error: "+error);
-                  res.render ('sendMessage.pug', {error_message: "The request didn't contain a valid JWT Header."});
+                  res.render ('sendMessage.pug', {users: userArr, error_message: "The request didn't contain a valid JWT Header."});
                 }
               }
               else{
@@ -134,7 +136,7 @@ UserController.prototype.sendMessage = function () {
             });
       }
       else {
-        res.render ('sendMessage.pug', {error_message: "The username requested does not exist."});
+        res.render ('sendMessage.pug', {users: userArr, error_message: "The username requested does not exist."});
       }
     };
 };
