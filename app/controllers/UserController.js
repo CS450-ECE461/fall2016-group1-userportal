@@ -64,8 +64,14 @@ UserController.prototype.showMe = function () {
 
 UserController.prototype.userInfo = function () {
     return function (req, res) {
-        return res.render('userInfo.pug', {fName: userInfo.firstName, lName: userInfo.lastName, email: userInfo.email,
-                                           handle : userInfo.handle, created : userInfo.created, updated : userInfo.updated) });
-
+        return res.render('userInfo.pug',
+          {
+            fName: 'First Name: '+ userInfo.firstName,
+            lName: 'Last Name: '+userInfo.lastName,
+            email: 'Email: '+userInfo.email,
+            handle : 'Username: '+userInfo.handle,
+            created : 'Your account was created on: '+userInfo.created,
+            updated : 'Your account was last updated at '+userInfo.updated
+          });
     };
 };
