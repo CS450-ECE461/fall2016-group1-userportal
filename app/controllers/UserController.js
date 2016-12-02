@@ -61,3 +61,11 @@ UserController.prototype.showMe = function () {
 
   }
 };
+
+UserController.prototype.userInfo = function () {
+    return function (req, res) {
+        return res.render('userInfo.pug', {fName: userInfo.firstName, lName: userInfo.lastName, email: userInfo.email,
+                                           handle : userInfo.handle, created : userInfo.created, updated : userInfo.updated) });
+
+    };
+};
