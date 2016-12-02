@@ -31,7 +31,7 @@ RegisterController.prototype.completeSignUp = function () {
             else if (req.body.password.search(regExp2) == -1){
                 res.render('register.pug', {error_message: 'Password must be greater than 8 characters long and contain at least one special character'});
             }
-            else if(confirmPassword != req.body.password){
+            else if('confirmPassword' != req.body.password){
             	res.render('register.pug', {error_message: 'Passwords must match'});
             }	
               if(err){
