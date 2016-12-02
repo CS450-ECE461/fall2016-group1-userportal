@@ -105,7 +105,7 @@ UserController.prototype.sendMessage = function () {
             }
             else{
               console.log(resp.body);
-              res.render ('dashboard.pug', {users: userArr});
+              res.render ('dashboard.pug', {welcome: 'Welcome '+userInfo.firstName, message: "Message has been successfully sent"});
             }
           });
     };
