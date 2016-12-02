@@ -3,6 +3,7 @@
 var blueprint = require ('@onehilltech/blueprint')
   ;
 var token;
+var FName;
 
 module.exports = UserController;
 
@@ -20,36 +21,29 @@ UserController.prototype.signout = function () {
     };
 };
 function getName(){
-  var newUser = {
-    "username" : username,
-    "password" : password
-  };
-  console.log("Username: "+newUser.username);
-  console.log("Password: "+newUser.password);
-  console.log("New User: "+ newUser )
-  request
-      .post('localhost:5000/api/v1/auth/jwt')
-      .type("json")
-      .set("Accept", "application/json")
-      .send(newUser)
-      .end(function (error, resp){
-        if(error){
-          if(error.status == '422')
-            console.log(error);
-        }
-        else{
-          var token = resp.body.jwt;
-          console.log(token);
-          return done (null, token);
-        }
-        return done(null, false);
-      });
+
 }
 
 UserController.prototype.showMe = function () {
   return function (req, res) {
     token = req.user
+    request
+        .post('localhost:5000/api/v1/users/me')
+        .type("json")
+        .set('Authorization', 'JWT '+token)
+        .end(function (error, resp){
+          if(error){
+            if(error.status == '400')
+              console.log("Error: "+error);
+              else if(error.status == '401')
+                console.log("Error: "+error);
+          }
+          else{
+            FName = resp.body.firstName;
+            console.log(FName);
+            res.render ('dashboard.pug', {welcome: 'Welcome '+FName});
+          }
+        });
 
-    res.render ('dashboard.pug', {welcome:"Welcome "+name });
   }
 };
