@@ -4,7 +4,14 @@ var blueprint = require ('@onehilltech/blueprint')
   ;
 var token;
 var FName;
-
+var userInfo = {
+  "firstName" : '',
+  "lastName" : '',
+  "email" : '',
+  "handle" : '',
+  "created" : '',
+  "updated" : ''
+};
 module.exports = UserController;
 
 function UserController () {
@@ -20,9 +27,6 @@ UserController.prototype.signout = function () {
 
     };
 };
-function getName(){
-
-}
 
 UserController.prototype.showMe = function () {
   return function (req, res) {
@@ -39,9 +43,19 @@ UserController.prototype.showMe = function () {
                 console.log("Error: "+error);
           }
           else{
-            FName = resp.body.firstName;
-            console.log(FName);
-            res.render ('dashboard.pug', {welcome: 'Welcome '+FName});
+            userInfo.firstName = resp.body.firstName;
+            userInfo.lastName = resp.body.lastName;
+            userInfo.email = resp.body.emailAddress;
+            userInfo.handle = resp.body.handle;
+            userInfo.created = resp.body.createdAt;
+            userInfo.updated = resp.body.updatedAt;
+            console.log(userInfo.firstName);
+            console.log(userInfo.lastName);
+            console.log(userInfo.email);
+            console.log(userInfo.handle);
+            console.log(userInfo.created);
+            console.log(userInfo.updated);
+            res.render ('dashboard.pug', {welcome: 'Welcome '+userInfo.firstName});
           }
         });
 
