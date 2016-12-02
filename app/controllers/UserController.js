@@ -71,6 +71,7 @@ UserController.prototype.userInfo = function () {
 };
 
 UserController.prototype.renderUsers = function () {
+  var userArr = {};
     return function (req, res) {
       request
           .get('localhost:5000/api/v1/users')
@@ -81,7 +82,10 @@ UserController.prototype.renderUsers = function () {
                 console.log("Error: "+error);
             }
             else{
-              console.log(resp.body);
+              userArr = resp.body.users;
+              userArr.forEach(function(value){
+                console.log(value.firstName);
+              });
               res.render ('sendMessage.pug', {users: 'Welcome '});
             }
           });
