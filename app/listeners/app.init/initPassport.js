@@ -7,7 +7,7 @@ var passport      = require ('passport')
 module.exports = initPassport;
 
 function initPassport (app) {
-
+  var User = app.models.User;
   var opts = {session: true};
 
   passport.use (new LocalStrategy (opts, authorize));
@@ -31,9 +31,8 @@ function initPassport (app) {
               console.log(error);
           }
           else{
-            var jwt = resp.body.jwt;
-            console.log(jwt);
-            return done (null, jwt);
+            var token = resp.body.jwt;
+            return done (null, token);
           }
           return done(null, false);
         });

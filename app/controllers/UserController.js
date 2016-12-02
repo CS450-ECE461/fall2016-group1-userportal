@@ -2,7 +2,16 @@
 
 var blueprint = require ('@onehilltech/blueprint')
   ;
-
+var token;
+var FName;
+var userInfo = {
+  "firstName" : '',
+  "lastName" : '',
+  "email" : '',
+  "handle" : '',
+  "created" : '',
+  "updated" : ''
+};
 module.exports = UserController;
 
 function UserController () {
@@ -21,6 +30,42 @@ UserController.prototype.signout = function () {
 
 UserController.prototype.showMe = function () {
   return function (req, res) {
-    res.render ('user.pug', {user: req.user});
+    token = req.user
+    request
+        .post('localhost:5000/api/v1/users/me')
+        .type("json")
+        .set('Authorization', 'JWT '+token)
+        .end(function (error, resp){
+          if(error){
+            if(error.status == '400')
+              console.log("Error: "+error);
+              else if(error.status == '401')
+                console.log("Error: "+error);
+          }
+          else{
+            userInfo.firstName = resp.body.firstName;
+            userInfo.lastName = resp.body.lastName;
+            userInfo.email = resp.body.emailAddress;
+            userInfo.handle = resp.body.handle;
+            userInfo.created = resp.body.createdAt;
+            userInfo.updated = resp.body.updatedAt;
+            res.render ('dashboard.pug', {welcome: 'Welcome '+userInfo.firstName});
+          }
+        });
+
   }
+};
+
+UserController.prototype.userInfo = function () {
+    return function (req, res) {
+        return res.render('userInfo.pug',
+          {
+            fName: 'First Name: '+ userInfo.firstName,
+            lName: 'Last Name: '+userInfo.lastName,
+            email: 'Email: '+userInfo.email,
+            handle : 'Username: '+userInfo.handle,
+            created : 'Your account was created on: '+userInfo.created,
+            updated : 'Your account was last updated at '+userInfo.updated
+          });
+    };
 };
