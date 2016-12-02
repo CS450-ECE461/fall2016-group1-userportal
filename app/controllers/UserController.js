@@ -69,3 +69,21 @@ UserController.prototype.userInfo = function () {
           });
     };
 };
+
+UserController.prototype.renderUsers = function () {
+    return function (req, res) {
+      request
+          .get('localhost:5000/api/v1/users')
+          .type("json")
+          .end(function (error, resp){
+            if(error){
+              if(error.status == '404')
+                console.log("Error: "+error);
+            }
+            else{
+              console.log(resp.body);
+              res.render ('sendMessage.pug', {users: 'Welcome '});
+            }
+          });
+    };
+};

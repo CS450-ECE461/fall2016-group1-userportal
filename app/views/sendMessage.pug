@@ -10,10 +10,40 @@ html(lang="en")
     body
         div.container
             h1 Send Message
+            form.form-horizontal(method='post', action='/sendMessage')
+              div.form-group
+                label.col-sm-2.control-label(for="username") Username*
+                div.col-sm-10
+                    input#username.form-control(type="text", name="username" value = "jsmith" required)
+              div.form-group
+                  label.col-sm-2.control-label(for="firstName") First Name*
+                  div.col-sm-10
+                      input#firstName.form-control(type="text", name="firstName" value="John"  required)
+              div.form-group
+                  label.col-sm-2.control-label(for="middleName") Middle Name
+                  div.col-sm-10
+                      input#middleName.form-control(type="text", name="middleName" value="Albert")
+              div.form-group
+                  label.col-sm-2.control-label(for="lastName") Last Name*
+                  div.col-sm-10
+                      input#lastName.form-control(type="text", name="lastName" value = "Smith" required)
+              div.form-group
+                  label.col-sm-2.control-label(for="emailAddress") Email*
+                  div.col-sm-10
+                      input#email.form-control(type="email", name="emailAddress" value = "john@test.com" required)
+              div.form-group
+                  label.col-sm-2.control-label(for="password") Password*
+                  div.col-sm-10
+                      input#password.form-control(type="password", name="password" value = "carlos!123")
+              div.form-group
+                  label.col-sm-2.control-label(for="confirmPassword") Confirm Password*
+                  div.col-sm-10
+                      input#confirmPassword.form-control(type="password", name="confirmPassword" value = "carlos!123")
+              div.form-group
+                  p= error_message
+                  div.col-sm-offset-2.col-sm-10
+                      button.btn.btn-default(type="submit") Submit
 
-            
             br
             a(href='/dashboard') Back to dashboard
             br
-            br
-            a(href='/signout') Logout
