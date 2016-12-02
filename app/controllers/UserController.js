@@ -84,9 +84,9 @@ UserController.prototype.renderUsers = function () {
             else{
               userArr = resp.body.users;
               userArr.forEach(function(value){
-                console.log(value.firstName);
+                console.log(value.handle);
               });
-              res.render ('sendMessage.pug', {users: 'Welcome '});
+              res.render ('sendMessage.pug', {users: userArr});
             }
           });
     };
