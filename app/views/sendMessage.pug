@@ -10,7 +10,12 @@ html(lang="en")
     body
         div.container
             h1 Send Message
-            p= users
+            br
+            h3 Available Users:
+            for usernames in users
+              span.col-sm-1 #{usernames.handle}
+            br
+            br
             form.form-horizontal(method='post', action='/sendMessage')
               div.form-group
                 label.col-sm-2.control-label(for="receiver") To*

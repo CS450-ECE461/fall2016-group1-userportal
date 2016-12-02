@@ -12,6 +12,7 @@ var userInfo = {
   "created" : '',
   "updated" : ''
 };
+var userArr = {};
 module.exports = UserController;
 
 function UserController () {
@@ -71,7 +72,6 @@ UserController.prototype.userInfo = function () {
 };
 
 UserController.prototype.renderUsers = function () {
-  var userArr = {};
     return function (req, res) {
       request
           .get('localhost:5000/api/v1/users')
