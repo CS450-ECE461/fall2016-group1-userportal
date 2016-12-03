@@ -9,12 +9,16 @@ html(lang="en")
 
     body
         div.container
-            h1=welcome
-            a(href='') Send Message
+            h1 Your Personal Information
+
+            p=fName
+            p=lName
+            p=email
+            p=handle
+            p=created
+            p=updated
             br
-            a(href='') See Messages
-            br
-            a(href='/userInfo') Personal Info
+            a(href='/dashboard') Back to dashboard
             br
             br
             a(href='/signout') Logout

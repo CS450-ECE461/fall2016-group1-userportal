@@ -3,13 +3,11 @@
   "description": "",
   "version": "0.0.1",
   "private": true,
-
   "scripts": {
-    "test": "env NODE_ENV=test mocha --recursive tests/tests",
+    "test": "env NODE_ENV=test mocha --recursive tests/**/*.test.js",
     "start-server": "env NODE_ENV=production forever -o ./app/temp/logs/output.log -e ./app/temp/logs/error.log start ./app/index.js",
     "stop-server": "env NODE_ENV=production forever stop app/index.js"
   },
-
   "dependencies": {
     "@onehilltech/blueprint": "^1.1.1",
     "@onehilltech/blueprint-mongodb": "^0.9.1",
@@ -19,15 +17,12 @@
     "supertest": "^2.0.1",
     "passport-local": "^1.0.0"
   },
-
-  "devDependencies": {
-
-  },
-
   "license": "Apache-2.0",
-
   "engines": {
     "node": ">=4.0.0",
     "npm": ">=3.0.0"
+  },
+  "devDependencies": {
+    "chai-spies": "^0.7.1"
   }
 }
