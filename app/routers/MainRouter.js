@@ -37,5 +37,8 @@ module.exports = exports = {
   },
   '/' :{
     get : { view : 'login.pug' }
+  },
+  '/images/User_picture' :{
+    get : { view : 'app/images/User_picture.svg'}
   }
 };
