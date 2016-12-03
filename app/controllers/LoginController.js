@@ -10,8 +10,7 @@ blueprint.controller (LoginController);
 
 LoginController.prototype.completeLogin = function () {
   return function (req, res) {
-<<<<<<< HEAD
-      var newUser = {
+     var newUser = {
         "username" : req.body.username,
         "password" : req.body.password,
       };
@@ -31,9 +30,6 @@ LoginController.prototype.completeLogin = function () {
               return  res.redirect('/dashboard');
             }
           });
-=======
-      return res.redirect('/dashboard');
->>>>>>> master
   };
 };
 
