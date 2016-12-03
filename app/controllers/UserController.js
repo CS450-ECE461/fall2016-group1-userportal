@@ -1,9 +1,12 @@
 'use strict';
 
-var blueprint = require ('@onehilltech/blueprint');
+var blueprint = require ('@onehilltech/blueprint')
+request =  require ('superagent')
+  ;
 var ResourceClient = require('../../lib/ResourceClient');
 var token;
 var FName;
+//var messageClient = new ResourceClient("http://localhost:5000", "messages");
 var userInfo = {
   "firstName" : '',
   "lastName" : '',
@@ -92,12 +95,12 @@ UserController.prototype.renderUsers = function () {
 
 UserController.prototype.sendMessage = function () {
     return function (req, res) {
-      var messageClient = new ResourceClient("http://localhost:5000", "messages");
+      var messageClient = new ResourceClient(request('http://localhost:5000'), "messages");
       messageClient.jwt = token;
       var message = {
         "receiver" : req.body.receiver,
-        "expireAt" : req.body.expireAt,
-        "content" : req.body.content,
+        "expireAt" : (Date.now() + 600000),
+        "content" : req.body.content
       };
       var userFound = false;
       console.log(message.receiver);
@@ -113,26 +116,26 @@ UserController.prototype.sendMessage = function () {
       });
 
       if(userFound){
-            messageClient.create(message, function (error, resp) {
-              if(error){
-                if(error.status == '422'){
-                  console.log("Error: "+error);
-                  res.render ('sendMessage.pug', {users: userArr, error_message: "The request didn't contain all necessary information"});
-                }
-                else if(error.status == '401'){
-                  console.log("Error: "+error);
-                  res.render ('sendMessage.pug', {users: userArr, error_message: "The request didn't contain a valid JWT Header."});
-                }
-              }
-              else{
-                console.log(resp.body);
-                res.render ('dashboard.pug',
-                {
-                  welcome: 'Welcome '+userInfo.firstName,
-                  message: "Message has been successfully sent"
-                });
-              }
+        messageClient.create(message, function (error, resp) {
+          if(error){
+            if(error.status == '422'){
+              console.log("Error: "+error);
+              res.render ('sendMessage.pug', {users: userArr, error_message: "The request didn't contain all necessary information"});
+            }
+            else if(error.status == '401'){
+              console.log("Error: "+error);
+              res.render ('sendMessage.pug', {users: userArr, error_message: "The request didn't contain a valid JWT Header."});
+            }
+          }
+          else{
+            console.log(resp.body);
+            res.render ('dashboard.pug',
+            {
+              welcome: 'Welcome '+userInfo.firstName,
+              message: "Message has been successfully sent"
             });
+          }
+        });
       }
       else {
         res.render ('sendMessage.pug', {users: userArr, error_message: "The username requested does not exist."});

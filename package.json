@@ -15,7 +15,8 @@
     "mocha": "^3.1.2",
     "superagent": "^3.0.0",
     "supertest": "^2.0.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "pluralize": "^3.0.0"
   },
   "license": "Apache-2.0",
   "engines": {
