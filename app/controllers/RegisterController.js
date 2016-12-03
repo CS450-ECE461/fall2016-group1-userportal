@@ -26,13 +26,13 @@ RegisterController.prototype.completeSignUp = function () {
         .send({ user: user})
         .end(function (error, resp){
             if(req.body.firstName.search(regExp) == -1 || req.body.middleName.search(regExp) == -1 || req.body.lastName.search(regExp) == -1){
-                res.render('register.pug', {error_message: 'First/middle/last name should contain letters only'});
+                return res.render('register.pug', {error_message: 'First/middle/last name should contain letters only'});
               }
             else if (req.body.password.search(regExp2) == -1){
-                res.render('register.pug', {error_message: 'Password must be greater than 8 characters long and contain at least one special character'});
+                return res.render('register.pug', {error_message: 'Password must be greater than 8 characters long and contain at least one special character'});
             }
-            else if('confirmPassword' != req.body.password){
-            	res.render('register.pug', {error_message: 'Passwords must match'});
+            else if(req.body.confirmPassword != req.body.password) {
+            	return res.render('register.pug', {error_message: 'Passwords must match'});
             }
               if(error){
                 if(error.status == '422'){
