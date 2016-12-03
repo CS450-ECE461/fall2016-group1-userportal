@@ -20,6 +20,7 @@ RegisterController.prototype.completeSignUp = function () {
         "handle" : req.body.username,
     };
     var regExp = /^[a-zA-Z]+$/;
+    var regExp2 = /(?=.*?[#?!@$%^&*-]).{9,}/ ;
     request
         .post('localhost:5000/api/v1/users')
         .send({ user: user})
