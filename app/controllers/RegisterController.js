@@ -32,7 +32,7 @@ RegisterController.prototype.completeSignUp = function () {
     }
     else{
       request
-          .post('localhost:5000/api/v1/users')
+          .post('https://prattle.bdfoster.com/api/v1/users')
           .send({ user: user})
           .end(function (error, resp){
               if(error){
