@@ -35,7 +35,7 @@ UserController.prototype.showMe = function () {
   return function (req, res) {
     token = req.user
     request
-        .post('localhost:5000/api/v1/users/me')
+        .post('https://prattle.bdfoster.com/api/v1/users/me')
         .type("json")
         .set('Authorization', 'JWT '+token)
         .end(function (error, resp){
@@ -76,7 +76,7 @@ UserController.prototype.userInfo = function () {
 UserController.prototype.renderUsers = function () {
     return function (req, res) {
       request
-          .get('localhost:5000/api/v1/users')
+          .get('https://prattle.bdfoster.com/api/v1/users')
           .type("json")
           .end(function (error, resp){
             if(error){
@@ -115,7 +115,7 @@ UserController.prototype.sendMessage = function () {
 
       if(userFound){
         request
-          .post('localhost:5000/api/v1/users/me')
+          .post('https://prattle.bdfoster.com/api/v1/users/me')
           .type("json")
           .set('Authorization', 'JWT '+token)
           .send(message)
