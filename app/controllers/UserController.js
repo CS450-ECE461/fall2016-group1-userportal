@@ -55,7 +55,6 @@ UserController.prototype.showMe = function () {
             userInfo.handle = resp.body.handle;
             userInfo.created = resp.body.createdAt;
             userInfo.updated = resp.body.updatedAt;
-            console.log(userInfo._id);
             res.render ('dashboard.pug', {welcome: 'Welcome '+userInfo.firstName});
           }
         });
@@ -105,14 +104,9 @@ UserController.prototype.sendMessage = function () {
         }
       };
       var userFound = false;
-      console.log(message.message.receiver);
-      console.log(message.message.expireAt);
-      console.log(message.message.content);
       userArr.forEach(function(value) {
         if(value.handle == message.message.receiver){
-          console.log("Username found: "+ message.message.receiver);
           message.message.receiver = value._id;
-          console.log("New value: "+ message.message.receiver);
           userFound = true;
         }
       });
