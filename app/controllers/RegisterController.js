@@ -20,13 +20,21 @@ RegisterController.prototype.completeSignUp = function () {
         "handle" : req.body.username,
     };
     var regExp = /^[a-zA-Z]+$/;
-    request
-        .post('localhost:5000/api/v1/users')
-        .send({ user: user})
-        .end(function (error, resp){
-            if(req.body.firstName.search(regExp) == -1 || req.body.middleName.search(regExp) == -1 || req.body.lastName.search(regExp) == -1){
-                res.render('register.pug', {error_message: 'First/middle/last name should contain letters only'});
-              }
+    var regExp2 = /(?=.*?[#?!@$%^&*-]).{9,}/ ;
+    if(req.body.firstName.search(regExp) == -1 || req.body.middleName.search(regExp) == -1 || req.body.lastName.search(regExp) == -1){
+        return res.render('register.pug', {error_message: 'First/middle/last name should contain letters only'});
+      }
+    else if (req.body.password.search(regExp2) == -1){
+        return res.render('register.pug', {error_message: 'Password must be greater than 8 characters long and contain at least one special character'});
+    }
+    else if(req.body.confirmPassword != req.body.password) {
+      return res.render('register.pug', {error_message: 'Passwords must match'});
+    }
+    else{
+      request
+          .post('localhost:5000/api/v1/users')
+          .send({ user: user})
+          .end(function (error, resp){
               if(error){
                 if(error.status == '422'){
                    res.render('register.pug', {error_message: 'Username and or email have been used already.'});
@@ -40,10 +48,10 @@ RegisterController.prototype.completeSignUp = function () {
               }else{
                 return  res.redirect('/login');
               }
+          });
+    }
 
-        });
   };
-
 };
 
 module.exports = RegisterController;
