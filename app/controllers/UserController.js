@@ -6,6 +6,7 @@ request =  require ('superagent')
 var token;
 var FName;
 var userInfo = {
+  '_id' : '',
   "firstName" : '',
   "lastName" : '',
   "email" : '',
@@ -46,12 +47,15 @@ UserController.prototype.showMe = function () {
                 console.log("Error: "+error);
           }
           else{
+
+            userInfo._id = resp.body._id;
             userInfo.firstName = resp.body.firstName;
             userInfo.lastName = resp.body.lastName;
             userInfo.email = resp.body.emailAddress;
             userInfo.handle = resp.body.handle;
             userInfo.created = resp.body.createdAt;
             userInfo.updated = resp.body.updatedAt;
+            console.log(userInfo._id);
             res.render ('dashboard.pug', {welcome: 'Welcome '+userInfo.firstName});
           }
         });
@@ -143,5 +147,24 @@ UserController.prototype.sendMessage = function () {
       else {
         res.render ('sendMessage.pug', {users: userArr, error_message: "The username requested does not exist."});
       }
+    };
+};
+
+UserController.prototype.viewMessage = function () {
+    return function (req, res) {
+      var message= {}
+      request
+          .get("https://prattle.bdfoster.com/api/v1/channels?members[$in]="+ userInfo._id)
+          .type("json")
+          .end(function (error, resp){
+            if(error){
+              message.content = "You have no messages";
+              res.render ('viewMessages.pug', {messages: message});
+            }
+            else{
+              message = resp.body;
+              res.render ('viewMessages.pug', {messages: message});
+            }
+          });
     };
 };

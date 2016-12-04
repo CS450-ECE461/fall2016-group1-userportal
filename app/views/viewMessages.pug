@@ -1,20 +1,20 @@
 doctype html
 html(lang="en")
     head
-        title User Dashboard
+        title Prattle | View Message
 
         link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
         link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
+
     body
         div.container
-            h1=welcome
-            p=message
-            a(href='/sendMessage') Send Message
+            h1 View Messages
             br
-            a(href='/viewMessages') See Messages
-            br
-            a(href='/userInfo') Personal Info
+            h3 Messages
+            for item in messages
+              span.col-sm-1 #{item.content}
             br
             br
-            a(href='/signout') Logout
+            a(href='/dashboard') Back to dashboard
+            br
