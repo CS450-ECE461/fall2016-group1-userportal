@@ -1,0 +1,39 @@
+doctype html
+html(lang="en")
+    head
+        title Prattle | Send Message
+
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
+        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
+
+    body
+        div.container
+            h1 Send Message
+            br
+            h3 Available Users:
+            for usernames in users
+              span.col-sm-1 #{usernames.handle}
+            br
+            br
+            form.form-horizontal(method='post', action='/sendMessage')
+              div.form-group
+                label.col-sm-2.control-label(for="receiver") To*
+                div.col-sm-10
+                    input#receiver.form-control(type="text", name="receiver" value="jsmith123" required)
+              div.form-group
+                  label.col-sm-2.control-label(for="expireAt") Expire at*
+                  div.col-sm-10
+                      input#expireAt.form-control(type="text", name="expireAt" value="600000"  required)
+              div.form-group
+                  label.col-sm-2.control-label(for="content") Message
+                  div.col-sm-10
+                      input#content.form-control(type="text", name="content" value="Hi, this is a test message" required)
+              div.form-group
+                  p= error_message
+                  div.col-sm-offset-2.col-sm-10
+                      button.btn.btn-default(type="submit") Send Message
+
+            br
+            a(href='/dashboard') Back to dashboard
+            br

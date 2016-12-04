@@ -9,51 +9,52 @@ html(lang="en")
 
     body(background="https://imgh.us/User_picture.svg")
         div.container(style="position: absolute; right: 0px; height: 105%; width: 482px; background: #03A9F4")
-            div(align="center" style="color: #37474F; padding-top: 0px")        
+            div(align="center" style="color: #37474F; padding-top: 0px")
                 h1 Register
 
             div(align="center" style="color: #37474F; padding-top: 5px")
                 h3 Fields with a star are required.
-                
+
             form.form-horizontal(method='post', action='/register')
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="username" style="color: #37474F") Username*
                     div.col-sm-10
                         input#username.form-control(type="text", style="font-weight: bold; color: #01579B", name="username" value = "jsmith" required)
-                    
+
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="firstName" style="color: #37474F") First Name*
                     div.col-sm-10
                         input#firstName.form-control(type="text", style="font-weight: bold; color: #01579B", name="firstName" value="John"  required)
-                
+
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="middleName") Middle Name
                     div.col-sm-10
                         input#middleName.form-control(type="text", style="font-weight: bold; color: #01579B", name="middleName" value="Albert")
-                
+
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="lastName") Last Name*
                     div.col-sm-10
                         input#lastName.form-control(type="text", style="font-weight: bold; color: #01579B", name="lastName" value = "Smith" required)
-                
+
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="emailAddress") Email*
                     div.col-sm-10
                         input#email.form-control(type="email", style="font-weight: bold; color: #01579B", name="emailAddress" value = "john@test.com" required)
-                
+
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="password") Password*
                     div.col-sm-10
                         input#password.form-control(type="password", style="font-weight: bold; color: #01579B", name="password" value = "carlos!123")
-                
+
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="confirmPassword") Confirm Password*
                     div.col-sm-10
                         input#confirmPassword.form-control(type="password", style="font-weight: bold; color: #01579B", name="confirmPassword" value = "carlos!123")
-                
+
                 div.form-group(align="center")
                     p= error_message
                     button.btn.btn-default(type="submit" style="color: #37474F") Submit
-
-                div.form-group    
-                    #login.button.btn.btn-default(onclick="location.href='/login'"  style="color: #37474F") Login
+                div(align="center" style="padding-top: 35px")
+                    label(align="center" style="color: #ECEFF1") -------- or --------
+                div(align="center" style="padding-top: 35px")
+                    a(href='/login' style="border-color: #ccc; background-repeat: repeat-x; text-shadow: 0 1px 0 #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 1px rgba(0,0,0,.075); background-color: #fff; border: 1px solid transparent; border-radius: 4px; cursor: pointer; display: inline-block; padding: 6px 12px; margin-bottom: 0; font-size: 14px; font-weight: 400; line-height: 1.42857143; text-align: center; white-space: nowrap; vertical-align: middle; color: #37474F; text-decoration : none") Back to Login
