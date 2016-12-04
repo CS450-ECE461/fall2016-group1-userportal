@@ -100,7 +100,7 @@ UserController.prototype.sendMessage = function () {
       var message = {
         message : {
           "receiver" : req.body.receiver,
-          "expireAt" : (Date.now() + 600000),
+          "expireAt" : (Date.now() + req.body.expireAt),
           "content" : req.body.content
         }
       };
