@@ -98,43 +98,50 @@ UserController.prototype.sendMessage = function () {
       var messageClient = new ResourceClient(request('http://localhost:5000'), "messages");
       messageClient.jwt = token;
       var message = {
-        "receiver" : req.body.receiver,
-        "expireAt" : (Date.now() + 600000),
-        "content" : req.body.content
+        message : {
+          "receiver" : req.body.receiver,
+          "expireAt" : (Date.now() + 600000),
+          "content" : req.body.content
+        }
       };
       var userFound = false;
-      console.log(message.receiver);
-      console.log(message.expireAt);
-      console.log(message.content);
+      console.log(message.message.receiver);
+      console.log(message.message.expireAt);
+      console.log(message.message.content);
       userArr.forEach(function(value) {
-        if(value.handle == message.receiver){
-          console.log("Username found: "+ message.receiver);
-          message.receiver = value._id;
-          console.log("New value: "+ message.receiver);
+        if(value.handle == message.message.receiver){
+          console.log("Username found: "+ message.message.receiver);
+          message.message.receiver = value._id;
+          console.log("New value: "+ message.message.receiver);
           userFound = true;
         }
       });
 
       if(userFound){
-        messageClient.create(message, function (error, resp) {
-          if(error){
-            if(error.status == '422'){
-              console.log("Error: "+error);
-              res.render ('sendMessage.pug', {users: userArr, error_message: "The request didn't contain all necessary information"});
+        request
+          .post('localhost:5000/api/v1/users/me')
+          .type("json")
+          .set('Authorization', 'JWT '+token)
+          .send(message)
+          .end(function (error, resp){
+            if(error){
+              if(error.status == '422'){
+                console.log("Error: "+error);
+                res.render ('sendMessage.pug', {users: userArr, error_message: "The request didn't contain all necessary information"});
+              }
+              else if(error.status == '401'){
+                console.log("Error: "+error);
+                res.render ('sendMessage.pug', {users: userArr, error_message: "The request didn't contain a valid JWT Header."});
+              }
             }
-            else if(error.status == '401'){
-              console.log("Error: "+error);
-              res.render ('sendMessage.pug', {users: userArr, error_message: "The request didn't contain a valid JWT Header."});
+            else{
+              console.log(resp.body);
+              res.render ('dashboard.pug',
+              {
+                welcome: 'Welcome '+userInfo.firstName,
+                message: "Message has been successfully sent"
+              });
             }
-          }
-          else{
-            console.log(resp.body);
-            res.render ('dashboard.pug',
-            {
-              welcome: 'Welcome '+userInfo.firstName,
-              message: "Message has been successfully sent"
-            });
-          }
         });
       }
       else {
