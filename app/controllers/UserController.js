@@ -35,6 +35,7 @@ UserController.prototype.signout = function () {
 UserController.prototype.showMe = function () {
   return function (req, res) {
     token = req.user
+    console.log(token);
     request
         .post('https://prattle.bdfoster.com/api/v1/users/me')
         .type("json")
@@ -55,6 +56,7 @@ UserController.prototype.showMe = function () {
             userInfo.handle = resp.body.handle;
             userInfo.created = resp.body.createdAt;
             userInfo.updated = resp.body.updatedAt;
+            console.log('ID: '+userInfo._id);
             res.render ('dashboard.pug', {welcome: 'Welcome '+userInfo.firstName});
           }
         });
@@ -98,22 +100,25 @@ UserController.prototype.sendMessage = function () {
     return function (req, res) {
       var message = {
         message : {
-          "receiver" : req.body.receiver,
-          "expireAt" : (Date.now() + req.body.expireAt),
-          "content" : req.body.content
-        }
-      };
+         "channel": { "receiver" : req.body.receiver },
+         "expireAt" : (Date.now() + parseInt(req.body.expireAt)),
+         "content" : req.body.content
+       }
+
+     };
       var userFound = false;
       userArr.forEach(function(value) {
-        if(value.handle == message.message.receiver){
-          message.message.receiver = value._id;
+        if(value.handle == message.message.channel.receiver){
+          console.log('To: '+value.handle);
+          message.message.channel.receiver = value._id;
           userFound = true;
         }
       });
 
       if(userFound){
+        console.log("Sending message to: "+message.message.channel.receiver);
         request
-          .post('https://prattle.bdfoster.com/api/v1/users/me')
+          .post('https://prattle.bdfoster.com/api/v1/messages')
           .type("json")
           .set('Authorization', 'JWT '+token)
           .send(message)
@@ -146,18 +151,21 @@ UserController.prototype.sendMessage = function () {
 
 UserController.prototype.viewMessage = function () {
     return function (req, res) {
-      var message= {}
+      var channels= {};
       request
-          .get("https://prattle.bdfoster.com/api/v1/channels?members[$in]="+ userInfo._id)
+          .get("https://prattle.bdfoster.com/api/v1/channels?members="+userInfo._id)
           .type("json")
+          .set('Authorization', 'JWT '+token)
           .end(function (error, resp){
             if(error){
               message.content = "You have no messages";
-              res.render ('viewMessages.pug', {messages: message});
+              console.log(error);
+              res.render ('viewMessages.pug', {messages: channels});
             }
             else{
-              message = resp.body;
-              res.render ('viewMessages.pug', {messages: message});
+              channels = resp.body.channels;
+              console.log(channels);
+              res.render ('viewMessages.pug', {messages: channels});
             }
           });
     };
