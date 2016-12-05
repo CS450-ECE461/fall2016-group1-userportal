@@ -21,7 +21,7 @@ RegisterController.prototype.completeSignUp = function () {
     };
     var regExp = /^[a-zA-Z]+$/;
     var regExp2 = /(?=.*?[#?!@$%^&*-]).{9,}/ ;
-    if(req.body.firstName.search(regExp) == -1 || req.body.middleName.search(regExp) == -1 || req.body.lastName.search(regExp) == -1){
+    if(req.body.firstName.search(regExp) == -1 || req.body.lastName.search(regExp) == -1){
         return res.render('register.pug', {error_message: 'First/middle/last name should contain letters only'});
       }
     else if (req.body.password.search(regExp2) == -1){
@@ -43,6 +43,7 @@ RegisterController.prototype.completeSignUp = function () {
                   res.render('register.pug', {error_message: 'Email has already been used.'});
                 }
                 else{
+                  console.log(error);
                   res.render('register.pug', {error_message: 'Something went wrong, try again.'});
                 }
               }else{
