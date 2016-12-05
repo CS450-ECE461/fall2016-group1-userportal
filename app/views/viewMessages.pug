@@ -12,8 +12,9 @@ html(lang="en")
             h1 View Messages
             br
             h3 Messages
-            for item in messages
-              span.col-sm-1 #{item.content}
+            for channel in messages
+              for item in channel
+                p.col-sm-12 #{item.content}
             br
             br
             a(href='/dashboard') Back to dashboard

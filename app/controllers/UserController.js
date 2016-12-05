@@ -109,14 +109,12 @@ UserController.prototype.sendMessage = function () {
       var userFound = false;
       userArr.forEach(function(value) {
         if(value.handle == message.message.channel.receiver){
-          console.log('To: '+value.handle);
           message.message.channel.receiver = value._id;
           userFound = true;
         }
       });
 
       if(userFound){
-        console.log("Sending message to: "+message.message.channel.receiver);
         request
           .post('https://prattle.bdfoster.com/api/v1/messages')
           .type("json")
@@ -134,7 +132,6 @@ UserController.prototype.sendMessage = function () {
               }
             }
             else{
-              console.log(resp.body);
               res.render ('dashboard.pug',
               {
                 welcome: 'Welcome '+userInfo.firstName,
@@ -150,23 +147,43 @@ UserController.prototype.sendMessage = function () {
 };
 
 UserController.prototype.viewMessage = function () {
-    return function (req, res) {
-      var channels= {};
-      request
-          .get("https://prattle.bdfoster.com/api/v1/channels?members="+userInfo._id)
-          .type("json")
-          .set('Authorization', 'JWT '+token)
-          .end(function (error, resp){
-            if(error){
-              message.content = "You have no messages";
-              console.log(error);
-              res.render ('viewMessages.pug', {messages: channels});
-            }
-            else{
-              channels = resp.body.channels;
-              console.log(channels);
-              res.render ('viewMessages.pug', {messages: channels});
-            }
-          });
-    };
+   return function (req, res) {
+     request
+         .get("https://prattle.bdfoster.com/api/v1/channels?members="+userInfo._id)
+         .type("json")
+         .set('Authorization', 'JWT '+token)
+         .end(function (error, resp){
+           if(error){
+             message.content = "You have no messages";
+             console.log(error);
+             res.render ('viewMessages.pug', {messages: channels});
+           }
+           else{
+             getMessagesFromChannels(resp.body.channels, res);
+           }
+         });
+   };
+};
+function getMessagesFromChannels(channels, res){
+  var messages = {};
+  var count = 0;
+  for (let channel of channels) {
+   request
+     .get("https://prattle.bdfoster.com/api/v1/messages?channel="+channel._id)
+     .type("json")
+     .set('Authorization', 'JWT '+token)
+     .end(function (error, resp){
+        if(error){
+          message.content = "You have no messages";
+          console.log(error);
+          return res.render ('viewMessages.pug', {messages: messages})
+        }
+        else{
+          messages[channel._id] = resp.body.messages;
+          if (++count == channels.length) {
+             return res.render ('viewMessages.pug', {messages: messages})
+          }
+        }
+    });
+  }
 };
