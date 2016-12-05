@@ -19,12 +19,12 @@ html(lang="en")
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="username" style="color: #37474F") Username*
                     div.col-sm-10
-                        input#username.form-control(type="text", style="font-weight: bold; color: #01579B", name="username" required)
+                        input#username.form-control(type="text", style="font-weight: bold; color: #01579B", name="username" value="test" required)
 
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="firstName" style="color: #37474F") First Name*
                     div.col-sm-10
-                        input#firstName.form-control(type="text", style="font-weight: bold; color: #01579B", name="firstName"  required)
+                        input#firstName.form-control(type="text", style="font-weight: bold; color: #01579B", name="firstName" value = "Rick"  required)
 
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="middleName") Middle Name
@@ -34,22 +34,22 @@ html(lang="en")
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="lastName") Last Name*
                     div.col-sm-10
-                        input#lastName.form-control(type="text", style="font-weight: bold; color: #01579B", name="lastName" required)
+                        input#lastName.form-control(type="text", style="font-weight: bold; color: #01579B", name="lastName" value="James" required)
 
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="emailAddress") Email*
                     div.col-sm-10
-                        input#email.form-control(type="email", style="font-weight: bold; color: #01579B", name="emailAddress" required)
+                        input#email.form-control(type="email", style="font-weight: bold; color: #01579B", name="emailAddress" value="rick@test.com" required)
 
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="password") Password*
                     div.col-sm-10
-                        input#password.form-control(type="password", style="font-weight: bold; color: #01579B", name="password")
+                        input#password.form-control(type="password", style="font-weight: bold; color: #01579B", value="carlos!123"  name="password")
 
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="confirmPassword") Confirm Password*
                     div.col-sm-10
-                        input#confirmPassword.form-control(type="password", style="font-weight: bold; color: #01579B", name="confirmPassword")
+                        input#confirmPassword.form-control(type="password", style="font-weight: bold; color: #01579B", value="carlos!123"  name="confirmPassword")
 
                 div.form-group(align="center")
                     p= error_message
