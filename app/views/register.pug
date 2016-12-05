@@ -7,8 +7,8 @@ html(lang="en")
         link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
 
-    body(background="https://imgh.us/User_picture.svg")
-        div.container(style="position: absolute; right: 0px; height: 105%; width: 482px; background: #03A9F4")
+    body(background="http://imgh.us/Prattle_Background.png")
+        div.container(style="position: absolute; right: 0px; height: 100%; width: 482px; background: #03A9F4")
             div(align="center" style="color: #37474F; padding-top: 0px")
                 h1 Register
 
@@ -19,12 +19,12 @@ html(lang="en")
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="username" style="color: #37474F") Username*
                     div.col-sm-10
-                        input#username.form-control(type="text", style="font-weight: bold; color: #01579B", name="username" value="test" required)
+                        input#username.form-control(type="text", style="font-weight: bold; color: #01579B", name="username" required)
 
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="firstName" style="color: #37474F") First Name*
                     div.col-sm-10
-                        input#firstName.form-control(type="text", style="font-weight: bold; color: #01579B", name="firstName" value = "Rick"  required)
+                        input#firstName.form-control(type="text", style="font-weight: bold; color: #01579B", name="firstName"  required)
 
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="middleName") Middle Name
@@ -34,22 +34,22 @@ html(lang="en")
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="lastName") Last Name*
                     div.col-sm-10
-                        input#lastName.form-control(type="text", style="font-weight: bold; color: #01579B", name="lastName" value="James" required)
+                        input#lastName.form-control(type="text", style="font-weight: bold; color: #01579B", name="lastName" required)
 
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="emailAddress") Email*
                     div.col-sm-10
-                        input#email.form-control(type="email", style="font-weight: bold; color: #01579B", name="emailAddress" value="rick@test.com" required)
+                        input#email.form-control(type="email", style="font-weight: bold; color: #01579B", name="emailAddress" required)
 
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="password") Password*
                     div.col-sm-10
-                        input#password.form-control(type="password", style="font-weight: bold; color: #01579B", value="carlos!123"  name="password")
+                        input#password.form-control(type="password", style="font-weight: bold; color: #01579B", name="password")
 
                 div.form-group(align="center" style="padding-top: 3px")
                     label.col-sm-2.control-label(for="confirmPassword") Confirm Password*
                     div.col-sm-10
-                        input#confirmPassword.form-control(type="password", style="font-weight: bold; color: #01579B", value="carlos!123"  name="confirmPassword")
+                        input#confirmPassword.form-control(type="password", style="font-weight: bold; color: #01579B", name="confirmPassword")
 
                 div.form-group(align="center")
                     p= error_message

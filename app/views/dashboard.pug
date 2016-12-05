@@ -7,15 +7,20 @@ html(lang="en")
         link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css")
         script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
     body(background-color="#eceff1")
-        img(src="http://imgh.us/Dash_Header.png")
+        img(src="http://imgh.us/Dash_Header.png" style="width:100%")
         div.container
             h1=welcome
             p=message
-            a(href='/sendMessage') Send Message
             br
-            a(href='/viewMessages') See Messages
-            br
-            a(href='/userInfo') Personal Info
+            a(href='/sendMessage' style="background-color: #37474f; color: #eceff1; padding: 15px 40px; text-align: center; font-size: 16px; cursor: pointer") Compose
             br
             br
-            a(href='/signout') Logout
+            a(href='/viewMessages' style="background-color: #37474f; color: #eceff1; padding: 15px 55px; text-align: center; font-size: 16px; cursor: pointer") Inbox
+            br
+            br
+            a(href='/userInfo' style="background-color: #37474f; color: #eceff1; padding: 15px 27px; text-align: center; font-size: 16px; cursor: pointer") Personal Info
+            br
+            br
+            br
+            br
+            a(href='/signout' style="background-color: #37474f; color: #eceff1; padding: 15px 49px; text-align: center; font-size: 16px; cursor: pointer") Logout
