@@ -17,8 +17,10 @@ function initPassport (app) {
       "username" : username,
       "password" : password
     };
+    console.log('IM here');
     request
-        .post('https://prattle.bdfoster.com/api/v1/auth/jwt')
+
+        .post('http://prattle.bdfoster.com/api/v1/auth/jwt')
         .type("json")
         .set("Accept", "application/json")
         .send(newUser)

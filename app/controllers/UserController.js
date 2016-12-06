@@ -37,7 +37,7 @@ UserController.prototype.showMe = function () {
     token = req.user
     console.log(token);
     request
-        .post('https://prattle.bdfoster.com/api/v1/users/me')
+        .post('http://prattle.bdfoster.com/api/v1/users/me')
         .type("json")
         .set('Authorization', 'JWT '+token)
         .end(function (error, resp){
@@ -81,7 +81,7 @@ UserController.prototype.userInfo = function () {
 UserController.prototype.renderUsers = function () {
     return function (req, res) {
       request
-          .get('https://prattle.bdfoster.com/api/v1/users')
+          .get('http://prattle.bdfoster.com/api/v1/users')
           .type("json")
           .end(function (error, resp){
             if(error){
@@ -116,7 +116,7 @@ UserController.prototype.sendMessage = function () {
 
       if(userFound){
         request
-          .post('https://prattle.bdfoster.com/api/v1/messages')
+          .post('http://prattle.bdfoster.com/api/v1/messages')
           .type("json")
           .set('Authorization', 'JWT '+token)
           .send(message)
@@ -149,7 +149,7 @@ UserController.prototype.sendMessage = function () {
 UserController.prototype.viewMessage = function () {
    return function (req, res) {
      request
-         .get("https://prattle.bdfoster.com/api/v1/channels?members="+userInfo._id)
+         .get("http://prattle.bdfoster.com/api/v1/channels?members="+userInfo._id)
          .type("json")
          .set('Authorization', 'JWT '+token)
          .end(function (error, resp){
@@ -169,7 +169,7 @@ function getMessagesFromChannels(channels, res){
   var count = 0;
   for (let channel of channels) {
    request
-     .get("https://prattle.bdfoster.com/api/v1/messages?channel="+channel._id)
+     .get("http://prattle.bdfoster.com/api/v1/messages?channel="+channel._id)
      .type("json")
      .set('Authorization', 'JWT '+token)
      .end(function (error, resp){
