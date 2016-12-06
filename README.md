@@ -1,4 +1,5 @@
 # fall2016-group1-userportal
+###Live demo for [Prattle](http://52.201.233.197:5001/)
 ###How to use: 
 1. Clone repo
 2. Install [MongoDB](https://docs.mongodb.com/manual/administration/install-community/)
@@ -13,6 +14,6 @@
 1. `git branch [name]` give it a proper name
 2. `git checkout [name]`
 
-###Link to our [Trello](https://trello.com/group1user) page(I have already invited you, check email).
+
 
 
