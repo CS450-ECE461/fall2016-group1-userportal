@@ -32,6 +32,7 @@ UserController.prototype.signout = function () {
     };
 };
 
+// save user information in userInfo
 UserController.prototype.showMe = function () {
   return function (req, res) {
     token = req.user
@@ -64,6 +65,7 @@ UserController.prototype.showMe = function () {
   }
 };
 
+// Display user info
 UserController.prototype.userInfo = function () {
     return function (req, res) {
         return res.render('userInfo.pug',
@@ -78,6 +80,7 @@ UserController.prototype.userInfo = function () {
     };
 };
 
+// Display the users that have already registered
 UserController.prototype.renderUsers = function () {
     return function (req, res) {
       request
@@ -107,13 +110,17 @@ UserController.prototype.sendMessage = function () {
 
      };
       var userFound = false;
+      
+      // api will accept the id of the user instead of the username,
+      // find the user by their username and change the value to its
+      // corresponding id.
       userArr.forEach(function(value) {
         if(value.handle == message.message.channel.receiver){
           message.message.channel.receiver = value._id;
           userFound = true;
         }
       });
-
+    
       if(userFound){
         request
           .post('http://prattle.bdfoster.com/api/v1/messages')
@@ -123,11 +130,9 @@ UserController.prototype.sendMessage = function () {
           .end(function (error, resp){
             if(error){
               if(error.status == '422'){
-                console.log("Error: "+error);
                 res.render ('sendMessage.pug', {users: userArr, error_message: "The request didn't contain all necessary information"});
               }
               else if(error.status == '401'){
-                console.log("Error: "+error);
                 res.render ('sendMessage.pug', {users: userArr, error_message: "The request didn't contain a valid JWT Header."});
               }
             }
@@ -167,6 +172,7 @@ UserController.prototype.viewMessage = function () {
 function getMessagesFromChannels(channels, res){
   var messages = {};
   var count = 0;
+  // api returns a list of channels, we do not want to render view unless all messages have been read by messages
   for (let channel of channels) {
    request
      .get("http://prattle.bdfoster.com/api/v1/messages?channel="+channel._id)
@@ -179,6 +185,7 @@ function getMessagesFromChannels(channels, res){
           return res.render ('viewMessages.pug', {messages: messages})
         }
         else{
+          // store each message received by backend
           messages[channel._id] = resp.body.messages;
           if (++count == channels.length) {
              return res.render ('viewMessages.pug', {messages: messages})
