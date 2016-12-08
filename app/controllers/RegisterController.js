@@ -8,7 +8,7 @@ function RegisterController () {
 
 blueprint.controller (RegisterController);
 
-
+// get the text from the register form, ensure it passes validation, register the user
 RegisterController.prototype.completeSignUp = function () {
   return function (req, res) {
      var user = {
@@ -35,6 +35,7 @@ RegisterController.prototype.completeSignUp = function () {
           .post('http://prattle.bdfoster.com/api/v1/users')
           .send({ user: user})
           .end(function (error, resp){
+              // render register view and display its corresponding error message
               if(error){
                 if(error.status == '422'){
                    res.render('register.pug', {error_message: 'Username and or email have been used already.'});
